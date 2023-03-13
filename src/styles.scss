@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(202, 204, 204);
+    color: rgb(51, 51, 51);
+}
+li{
+    list-style: none;
+}
+.container{
+    background-color: white;
+    max-width: 1200px;
+    margin: 50px auto;
+    border-radius: 1rem;
+}
+header{
+    padding: 0 1.5rem;
+    border-bottom: 1px solid rgb(182, 182, 182);
+    display: flex;
+    justify-content: space-between;
+    .header-left{
+        display: flex;
+        align-items: center;
+        text-transform: uppercase;
+
+        img{
+            margin-right: 1rem;
+        }
+        h1{
+            font-size: 1.5rem;
+        }
+        h4{
+            opacity: 0.7;
+            font-size: 0.75rem;
+        }
+    }
+    .header-right{
+        display: flex;
+        align-items: center;
+
+        img{
+            cursor: pointer;
+        }
+        
+
+        ul{
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+    }
+}
+
+main{
+    padding: 2rem 1.5rem;
+
+    .search{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        input{
+            padding: 4px;
+            outline: none;
+        }
+    }
+
+    .cards{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        
+
+        .item{
+
+           img{
+            &:first-child{
+                cursor: pointer;
+            }
+           }
+
+
+            width: 250px;
+            margin: 2rem;
+            border: 1px solid gray;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: 0.1s linear;
+
+            &:hover{
+                transform: translateY(-5px);
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            }
+
+            h5{
+                margin-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 1.5rem;
+
+                img{
+                    cursor: pointer;
+                };
+            }
+        }
+
+    }
+}
+
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    .drawer{
+        width: 20vw;
+        height: 100vh;
+        background-color: #fff;
+        position: fixed;
+        right: 0;
+        padding: 1rem;
+
+        h4{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.5rem;
+
+            img{
+                cursor: pointer;
+            }
+        }
+    }
+
+}
