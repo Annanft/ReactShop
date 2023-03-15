@@ -1,3 +1,4 @@
+import GifLoader from 'react-gif-loader';
 import Header from './components/Header';
 import styles from './styles.scss';
 import { Modal } from './components/Modal';
@@ -31,15 +32,15 @@ import axios from 'axios';
 //     img: './imgItems/8.jpg',
 //   },
 // ];
-
-
+// https://media.giphy.com/media/l378zKVk7Eh3yHoJi/source.gif
 
 function App() {
   const [modal, setModal] = useState(false);
   const [input, setInput] = useState('');
   const [items, setItems] = useState([]);
   const [cartItems, setcartItems] = useState([]);
-  const [removeCartItems, setRemoveCartItems] = useState([]);
+  const [load, setload] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     axios
@@ -47,8 +48,11 @@ function App() {
       .then((res) => setItems(res.data));
     axios
       .get('https://6410743cbe7258e1452a6a4a.mockapi.io/cart')
-      .then((res) => setcartItems(res.data));
+      .then((res) => setcartItems(res.data))
+      .finally(()=> setload(false))
   }, []);
+
+  
 
   const addToCart = (p) => {
     axios.post('https://6410743cbe7258e1452a6a4a.mockapi.io/cart', p);
@@ -57,14 +61,25 @@ function App() {
 
   const removeFromCart = (id) => {
     axios.delete(`https://6410743cbe7258e1452a6a4a.mockapi.io/cart/${id}`);
-    setcartItems((prev)=> prev.filter((item)=> item.id !==id))
-   
-  }
+    setcartItems((prev) => prev.filter((item) => item.id !== id));
+  };
 
   return (
     <div className="wrapper">
-      <div className="container">
-        {modal && <Modal x={setModal} items={cartItems} removeFromCart={removeFromCart}/>}
+      
+      { load ? <GifLoader
+                loading={true}
+                imageSrc="./load.gif"
+                // imageStyle={imageStyle}
+                overlayBackground="rgba(0,0,0,0.5)"
+            />:<div className="container">
+        {modal && (
+          <Modal
+            x={setModal}
+            items={cartItems}
+            removeFromCart={removeFromCart}
+          />
+        )}
         <Header x={setModal} />
         <main>
           <div className="search">
@@ -84,7 +99,8 @@ function App() {
               })}
           </div>
         </main>
-      </div>
+      </div>}
+      
     </div>
   );
 }
